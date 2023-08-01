@@ -20,5 +20,5 @@ async function connectToDB() {
     throw error;
   }
 }
-
+// 
 module.exports = connectToDB;

@@ -1,10 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const connectToDB = require('./connection');
-
 // Middleware to parse incoming JSON data
 app.use(express.json());
-
+app.use(cors());
 // Connect to MongoDB and get the database instance
 connectToDB()
   .then((db) => {
@@ -12,7 +12,7 @@ connectToDB()
     // Now you can define routes and perform database operations
 
     // Example route: Fetch data from MongoDB
-    app.get('/', async (req, res) => {
+    app.get('/getAllData', async (req, res) => {
       try {
         const collection = db.collection('product'); // Replace with your collection name
         const data = await collection.find().toArray();
@@ -24,7 +24,7 @@ connectToDB()
     });
 
     // Start the server
-    const port = 3000;
+    const port = 3001;
     app.listen(port, () => {
       console.log(`Server started on http://localhost:${port}`);
     });
